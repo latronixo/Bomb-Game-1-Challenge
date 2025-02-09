@@ -96,10 +96,12 @@ class CategoriesViewController: UIViewController {
     // MARK: - Actions
     
     @objc func backToMainScreen() {
-        navigationController?.popViewController(animated: true)
+    navigationController?.popViewController(animated: true)
     }
     @objc func goToHelpVC() {
-    navigationController?.popViewController(animated: true)
+        
+        let helpVC = HelpCategoryView()
+        navigationController?.pushViewController(helpVC, animated: true)
 }
 
 }
