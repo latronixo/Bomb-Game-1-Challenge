@@ -1,0 +1,10 @@
+import UIKit
+
+public final class SettingsAssembly {
+    @MainActor public static func assemble() -> UIViewController {
+        let settingsService = SettingsService()
+        let presenter = SettingsPresenter(settingsService: settingsService)
+        let view = SettingsViewController(presenter: presenter)
+        return view
+    }
+}
