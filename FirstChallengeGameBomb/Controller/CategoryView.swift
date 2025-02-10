@@ -10,7 +10,7 @@ import UIKit
 class CategoriesViewController: UIViewController {
     
     private let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-    
+    private let slideUpTransitioningDelegate = SlideUpTransitioningDelegate()
     private var categories: [Category] = [
         Category(name: "O Разном", imageName: "smileSquare", isSelected: false),
         Category(name: "Спорт и Хобби", imageName: "sport", isSelected: false),
@@ -86,11 +86,10 @@ class CategoriesViewController: UIViewController {
         image: UIImage(systemName: "questionmark.circle.fill"),
         style: .plain,
         target: self,
-        action: #selector(goToHelpVC)
+        action: #selector(showHelpVC)
     )
-    
         questionButton.tintColor = .appYellow
-    navigationItem.rightBarButtonItem = questionButton
+        navigationItem.rightBarButtonItem = questionButton
 }
     
     // MARK: - Actions
@@ -98,10 +97,11 @@ class CategoriesViewController: UIViewController {
     @objc func backToMainScreen() {
     navigationController?.popViewController(animated: true)
     }
-    @objc func goToHelpVC() {
-        
-        let helpVC = HelpCategoryView()
-        navigationController?.pushViewController(helpVC, animated: true)
+    @objc private func showHelpVC() {
+        let helpVC = HelpCaregoryViewController()
+        helpVC.modalPresentationStyle = .custom
+        helpVC.transitioningDelegate = slideUpTransitioningDelegate
+        present(helpVC, animated: true)
 }
 
 }

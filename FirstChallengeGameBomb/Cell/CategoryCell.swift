@@ -105,6 +105,14 @@ class CategoryCell: UICollectionViewCell {
         updateSelectionState(isSelected: category.isSelected)
     }
     
+    func configureForHelpVC(with category: Category) {
+        cathergoryLabel.text = category.name
+        imageView.image = UIImage(named: category.imageName)
+        updateSelectionState(isSelected: false)
+        checkmarkView.isHidden = false
+        
+    }
+    
     private func addShadow() {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.1
