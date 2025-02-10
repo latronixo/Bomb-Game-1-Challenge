@@ -84,6 +84,8 @@ class HelpCaregoryViewController: UIViewController {
     
     // MARK: - Setup UI
     private func setupUI() {
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 30
         backgroundImage.image = UIImage(named: "Topographic 3")
         backgroundImage.contentMode = .scaleAspectFill
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
@@ -91,9 +93,9 @@ class HelpCaregoryViewController: UIViewController {
         // Настройка ScrollView
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.isScrollEnabled = false
-        //scrollView.backgroundColor = .appYellow.withAlphaComponent(0.9)
-        scrollView.backgroundColor = .appYellow
-        scrollView.layer.cornerRadius = 20
+        scrollView.backgroundColor = .appYellow.withAlphaComponent(0.8)
+        //scrollView.backgroundColor = .appYellow
+        scrollView.layer.cornerRadius = 30
         scrollView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         contentView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -145,11 +147,11 @@ class HelpCaregoryViewController: UIViewController {
             categoriesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             categoriesLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            collectionView.topAnchor.constraint(equalTo: categoriesLabel.bottomAnchor, constant: 16),
-            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            collectionView.heightAnchor.constraint(equalToConstant: 300),
-            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
+            collectionView.topAnchor.constraint(equalTo: categoriesLabel.bottomAnchor, constant: 30),
+            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
+            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
+            collectionView.heightAnchor.constraint(equalToConstant: 350),
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30)
         ])
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         view.addGestureRecognizer(panGesture)
@@ -192,13 +194,14 @@ extension HelpCaregoryViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.width - 16) / 2
-        return CGSize(width: width, height: 120)
+        return CGSize(width: width, height: 150)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         categories[indexPath.item].isSelected.toggle()
         collectionView.reloadItems(at: [indexPath])
     }
+    
 }
 
 
