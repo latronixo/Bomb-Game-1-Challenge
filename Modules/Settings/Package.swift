@@ -10,8 +10,15 @@ let package = Package(
             name: "Settings",
             targets: ["Settings"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.7.1"))
+    ],
     targets: [
         .target(
-            name: "Settings"),
+            name: "Settings",
+            dependencies: [
+                "SnapKit"
+            ]
+        ),
     ]
 )
