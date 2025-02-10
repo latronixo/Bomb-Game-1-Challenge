@@ -6,14 +6,15 @@
 //
 
 import UIKit
+import Settings
 
-class MainViewController: UIViewController {
+class MainViewController: BaseViewController {
 
-    private let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+    //private let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
     
     private lazy var mainStackView: UIStackView = {
         let element = UIStackView()
-        element.spacing = 0
+        element.spacing = 80
         element.distribution = .fillEqually
         element.axis = .vertical
         
@@ -50,7 +51,7 @@ class MainViewController: UIViewController {
     private let bombMainImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "bombMainScreen")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -69,23 +70,19 @@ class MainViewController: UIViewController {
     }
 
     private func setupUI () {
-        view.addSubview(backgroundImage)
-        
-        //view.tintColor = UIColor(red: 1, green: 210/255, blue: 94/255, alpha: 1.00)
-        view.backgroundColor = .white
-        backgroundImage.image = UIImage(named: "Topographic 3")
-        backgroundImage.contentMode = .scaleToFill
-        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
+      
+        view.backgroundColor = .appYellowMainView
+
         
         //создаем главный вертикальный стек
         view.addSubview(mainStackView)
         
         //в главный вертикальный стек добавляем элементы
-        mainStackView.addArrangedSubview(firstTitleLabel)    //надпись сверху
-        mainStackView.addArrangedSubview(secondTitleLabel) //горизонтальный стек с изображениями яиц
-        mainStackView.addArrangedSubview(bombMainImage)     //View с таймером
-        mainStackView.addArrangedSubview(startGameButton)     //View с таймером
-        mainStackView.addArrangedSubview(categoriesButton)     //View с таймером
+        mainStackView.addArrangedSubview(firstTitleLabel)
+        mainStackView.addArrangedSubview(secondTitleLabel)
+        mainStackView.addArrangedSubview(bombMainImage)
+        mainStackView.addArrangedSubview(startGameButton)
+        mainStackView.addArrangedSubview(categoriesButton)
 
         
 //        view.addSubview(startGameButton)
@@ -104,10 +101,10 @@ class MainViewController: UIViewController {
     
     private func setupConstraints () {
         NSLayoutConstraint.activate([
-            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
+//            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             //главный вертикальный стек прикрепляем в safeArea, справа и слева только делаем отступы по 20
             mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -133,13 +130,13 @@ class MainViewController: UIViewController {
             bombMainImage.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor),
 
             //кнопка Старт игры
-            startGameButton.heightAnchor.constraint(equalToConstant: 20),
+            startGameButton.heightAnchor.constraint(equalToConstant: 10),
             startGameButton.bottomAnchor.constraint(equalTo: categoriesButton.topAnchor),
             startGameButton.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor, constant: 10),
             startGameButton.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor, constant: -10),
 
             //кнопку Категории крепим к нижней части mainStackView
-            categoriesButton.heightAnchor.constraint(equalToConstant: 20),
+            categoriesButton.heightAnchor.constraint(equalToConstant: 10),
             categoriesButton.bottomAnchor.constraint(equalTo: mainStackView.bottomAnchor),
             categoriesButton.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor, constant: 10),
             categoriesButton.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor, constant: -10),
@@ -178,7 +175,7 @@ class MainViewController: UIViewController {
     }
 
     @objc func goToHelpVC() {
-        let helpVC = HelpCategoryView()
+        let helpVC = HelpCaregoryViewController()
         navigationController?.pushViewController(helpVC, animated: true)
     }
 
