@@ -8,6 +8,15 @@ final class SettingsViewController: UIViewController {
     private let presenter: ISettingsPresenter
     private let tableManager: ISettingsTableManager
     
+    private lazy var backgroundLayer: CALayer = {
+        let image = ModuleAsset.backgroundImage
+        let layer = CALayer()
+        layer.frame = view.bounds
+        layer.contents = image.cgImage
+        layer.contentsGravity = .resizeAspectFill
+        return layer
+    }()
+    
     private lazy var tableView: UITableView = {
         let table = UITableView()
         return table
@@ -28,6 +37,12 @@ final class SettingsViewController: UIViewController {
         super.viewDidLoad()
         setupView()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        guard backgroundLayer.superlayer == nil else { return }
+        view.layer.insertSublayer(backgroundLayer, at: .zero)
+    }
 }
 
 extension SettingsViewController: @preconcurrency ISettingsViewController {
@@ -38,6 +53,6 @@ extension SettingsViewController: @preconcurrency ISettingsViewController {
 
 private extension SettingsViewController {
     func setupView() {
-        view.backgroundColor = UIColor(patternImage: AssetImages.background)
+        view.backgroundColor = ModuleAsset.backgroundColor
     }
 }
