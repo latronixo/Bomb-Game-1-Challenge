@@ -2,6 +2,7 @@ import UIKit
 
 protocol ISettingsTableManager {
     func setup(table: UITableView)
+    func reloadTable(_ sections: [SettingsSection])
 }
 
 final class SettingsTableManager: NSObject {
@@ -29,6 +30,11 @@ extension SettingsTableManager: @preconcurrency ISettingsTableManager {
             DisclosureSettingsTableViewCell.self,
             forCellReuseIdentifier: DisclosureSettingsTableViewCell.reuseIdentifier
         )
+    }
+    
+    @MainActor func reloadTable(_ sections: [SettingsSection]) {
+        self.sections = sections
+        tableView?.reloadData()
     }
 }
 

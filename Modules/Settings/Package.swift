@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "Settings",
+    platforms: [.iOS(.v13)],
     products: [
         .library(
             name: "Settings",
@@ -18,6 +19,9 @@ let package = Package(
             name: "Settings",
             dependencies: [
                 "SnapKit"
+            ],
+            resources: [
+                .process("Resources/Assets.xcassets")
             ]
         ),
     ]

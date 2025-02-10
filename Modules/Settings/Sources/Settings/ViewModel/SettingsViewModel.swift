@@ -8,8 +8,13 @@ enum SettingsSection {
 
 struct TitleSettingsViewModel {
     let title: String
+    let type: GameTime
     let isSelected: Bool
     let onSelect: () -> Void
+    
+    enum GameTime: Int {
+        case short, middle, long, random
+    }
 }
 
 struct DisclosureSettingsViewModel {
@@ -23,3 +28,9 @@ struct ToggleSettingsViewModel {
     let isOn: Bool
     let onToggle: () -> Void
 }
+
+//public struct CurrentSettings {
+//    public static var gameTime: GameTime {
+//        SettingsValues.gameTime
+//    }
+//}

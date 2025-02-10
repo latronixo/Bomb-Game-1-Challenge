@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4DC5A5B82D5A4A38001520D8 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = 4DC5A5B72D5A4A38001520D8 /* Settings */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		6B2020DB2D58D1260008952A /* FirstChallengeGameBomb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstChallengeGameBomb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -51,17 +55,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DC5A5B82D5A4A38001520D8 /* Settings in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4DC5A5B62D5A4A38001520D8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6B2020D22D58D1260008952A = {
 			isa = PBXGroup;
 			children = (
 				4D97F2BF2D595E20006F9463 /* Modules */,
 				6B2020DD2D58D1260008952A /* FirstChallengeGameBomb */,
+				4DC5A5B62D5A4A38001520D8 /* Frameworks */,
 				6B2020DC2D58D1260008952A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,6 +108,7 @@
 			);
 			name = FirstChallengeGameBomb;
 			packageProductDependencies = (
+				4DC5A5B72D5A4A38001520D8 /* Settings */,
 			);
 			productName = FirstChallengeGameBomb;
 			productReference = 6B2020DB2D58D1260008952A /* FirstChallengeGameBomb.app */;
@@ -364,6 +378,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4DC5A5B72D5A4A38001520D8 /* Settings */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Settings;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6B2020D32D58D1260008952A /* Project object */;
 }
