@@ -49,61 +49,63 @@ final class FinalGameViewController: BaseViewController {
         return button
     }()
     
-    private lazy var buttonStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [otherTaskButton, restartButton])
-        stackView.axis = .vertical
-        stackView.spacing = 16
-        stackView.alignment = .fill
-        return stackView
-    }()
-    
-    private lazy var contentStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [gameImageView, descriptionLabel])
-        stackView.axis = .vertical
-        stackView.spacing = 24
-        stackView.alignment = .fill
-        return stackView
-    }()
-    
-    private lazy var mainStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [titleLabel, contentStackView, buttonStackView])
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.spacing = 35
-        return stackView
-    }()
+    private let tasks = [
+        "В следующем раунде говорить шёпотом",
+        "В следующем раунде отвечать с закрытыми глазами",
+        "В следующем раунде после ответа хлопать в ладоши",
+        "В следующем раунде говорить как робот",
+        "В следующем раунде отвечать на вопросы песней",
+        "В следующем раунде нельзя говорить 'да' и 'нет'",
+        "В следующем раунде говорить быстро, как аукционист",
+        "В следующем раунде отвечать только вопросами",
+        "В следующем раунде на каждое слово показывать жестом",
+        "В следующем раунде отвечать только односложными словами"
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         restartButton.addTarget(self, action: #selector(restartButtonTapped), for: .touchUpInside)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        descriptionLabel.preferredMaxLayoutWidth = contentStackView.frame.width
+        otherTaskButton.addTarget(self, action: #selector(otherTaskButtonTapped), for: .touchUpInside)
     }
     
     private func setupUI() {
         view.backgroundColor = .white
-        view.addSubview(mainStackView)
         
-        mainStackView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(titleLabel)
+        view.addSubview(gameImageView)
+        view.addSubview(descriptionLabel)
+        view.addSubview(otherTaskButton)
+        view.addSubview(restartButton)
+        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        gameImageView.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        otherTaskButton.translatesAutoresizingMaskIntoConstraints = false
+        restartButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 23),
-            mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -23),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 70),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
+            gameImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
+            gameImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             gameImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
             gameImageView.heightAnchor.constraint(equalTo: gameImageView.widthAnchor),
             
-            buttonStackView.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor, constant: 40),
-            buttonStackView.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor, constant: -40),
-            buttonStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            descriptionLabel.topAnchor.constraint(equalTo: gameImageView.bottomAnchor, constant: 34),
+            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
-            otherTaskButton.heightAnchor.constraint(equalToConstant: 50),
-            restartButton.heightAnchor.constraint(equalToConstant: 50)
+            restartButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            restartButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 23),
+            restartButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -23),
+            restartButton.heightAnchor.constraint(equalToConstant: 55),
+            
+            otherTaskButton.bottomAnchor.constraint(equalTo: restartButton.topAnchor, constant: -16),
+            otherTaskButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 23),
+            otherTaskButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -23),
+            otherTaskButton.heightAnchor.constraint(equalToConstant: 55)
         ])
     }
     
@@ -113,7 +115,12 @@ final class FinalGameViewController: BaseViewController {
             navigationController.pushViewController(mainViewController, animated: true)
         }
     }
+    
+    @objc private func otherTaskButtonTapped() {
+        descriptionLabel.text = tasks.randomElement()
+    }
 }
+
 
 // Delete before pull!!
 
