@@ -5,4 +5,8 @@
 //  Created by Валентин latronixo on 09.02.2025.
 //
 
-import Foundation
+import UIKit
+
+final class FinalGameViewController: UIViewController {
+    
+}
