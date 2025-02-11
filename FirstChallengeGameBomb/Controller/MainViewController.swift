@@ -10,23 +10,13 @@ import Settings
 
 class MainViewController: BaseViewController {
 
-    //private let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-    
-    private lazy var labelsStackView: UIStackView = {
-        let element = UIStackView()
-        element.spacing = 5
-        element.distribution = .fillEqually
-        element.axis = .vertical
-        
-        element.translatesAutoresizingMaskIntoConstraints = false
-        return element
-    } ()
+    private let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
     
     private lazy var firstTitleLabel: UILabel = {
         let element = UILabel()
         element.text = "ИГРА ДЛЯ КОМПАНИИ"
         element.textAlignment = .center
-        element.font = .systemFont(ofSize: 25)
+        element.font = .setFont(.sfProRoundedBlack, size: 32)
         element.textAlignment = .center
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -36,7 +26,7 @@ class MainViewController: BaseViewController {
         let element = UILabel()
         element.text = "БОМБА"
         element.textAlignment = .center
-        element.font = .systemFont(ofSize: 40, weight: .bold)
+        element.font = .setFont(.sfProRoundedBlack, size: 50)
         element.textAlignment = .center
         
         element.translatesAutoresizingMaskIntoConstraints = false
@@ -56,92 +46,59 @@ class MainViewController: BaseViewController {
 
     private let categoriesButton = UIButton(title: "Категории", backgroundColor: UIColor(red: 245/255, green: 244/255, blue: 238/255, alpha: 1.00))
 
-    private lazy var buttonsStackView: UIStackView = {
-        let element = UIStackView()
-        element.spacing = 5
-        element.distribution = .fillEqually
-        element.axis = .vertical
-        
-        element.translatesAutoresizingMaskIntoConstraints = false
-        return element
-    } ()
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupNavigation()
         setupConstraints()
+        
+        startGameButton.addTarget(self, action: #selector(startGameButtonTapped), for: .touchUpInside)
+        categoriesButton.addTarget(self, action: #selector(categoriesButtonTapped), for: .touchUpInside)
     }
 
     private func setupUI () {
-        [firstTitleLabel, secondTitleLabel, bombMainImage]
+        [backgroundImage, firstTitleLabel, secondTitleLabel, bombMainImage, startGameButton, categoriesButton]
             .forEach({ view.addSubview($0) })
-      
+
+        backgroundImage.image = UIImage(named: "backgroundMainScreen")
+        backgroundImage.contentMode = .scaleAspectFill
+        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
+
         view.backgroundColor = .appYellowMainView
         
-        //в вертикальный стек добавляем элементы
-//        labelsStackView.addArrangedSubview(firstTitleLabel)
-//        labelsStackView.addArrangedSubview(secondTitleLabel)
-//        
-//        buttonsStackView.addArrangedSubview(startGameButton)
-//        buttonsStackView.addArrangedSubview(categoriesButton)
-
-        
-//        view.addSubview(startGameButton)
-//        view.addSubview(categoriesButton)
-        
-//        startGameButton.addTarget(self, action: #selector(startGameButtonTapped), for: .touchUpInside)
-//        categoriesButton.addTarget(self, action: #selector(categoriesButtonTapped), for: .touchUpInside)
-
-//        NSLayoutConstraint.activate([
-//
-//            
-//        ])
     }
     
     //MARK: - Contstraints
     
     private func setupConstraints () {
         NSLayoutConstraint.activate([
-//            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
-//            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            //главный вертикальный стек прикрепляем в safeArea, справа и слева только делаем отступы по 20
-//            mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-//            mainStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-//            mainStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-//            
-            //закрепляем firstTitleLabel в центре mainStackView
+            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+ 
             firstTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
             firstTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//
-//            //закрепляем secondTitleLabel в центре mainStackView
+
             secondTitleLabel.topAnchor.constraint(equalTo: firstTitleLabel.bottomAnchor, constant: 12),
             secondTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            
-            //картинку с изображением бомбы размещаем по центру
+
             bombMainImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             bombMainImage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            bombMainImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
-            bombMainImage.heightAnchor.constraint(equalTo: bombMainImage.widthAnchor)
-//            bombMainImage.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor),
-//            bombMainImage.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor),
+            bombMainImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.76),
+            bombMainImage.heightAnchor.constraint(equalTo: bombMainImage.widthAnchor),
 
             //кнопка Старт игры
-//            startGameButton.heightAnchor.constraint(equalToConstant: 10),
-//            startGameButton.bottomAnchor.constraint(equalTo: categoriesButton.topAnchor),
-//            startGameButton.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor, constant: 10),
-//            startGameButton.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor, constant: -10),
-//
-//            //кнопку Категории крепим к нижней части mainStackView
-//            categoriesButton.heightAnchor.constraint(equalToConstant: 10),
-//            categoriesButton.bottomAnchor.constraint(equalTo: mainStackView.bottomAnchor),
-//            categoriesButton.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor, constant: 10),
-//            categoriesButton.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor, constant: -10),
+            startGameButton.topAnchor.constraint(equalTo: bombMainImage.bottomAnchor, constant: 75),
+            startGameButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            startGameButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            startGameButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.07),
+
+            //кнопка Категории
+            categoriesButton.topAnchor.constraint(equalTo: startGameButton.bottomAnchor, constant: 10),
+            categoriesButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            categoriesButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            categoriesButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.07)
 
         ])
     }
