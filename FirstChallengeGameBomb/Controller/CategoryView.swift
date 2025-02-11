@@ -86,7 +86,7 @@ class CategoriesViewController: UIViewController {
         image: UIImage(systemName: "questionmark.circle.fill"),
         style: .plain,
         target: self,
-        action: #selector(showHelpVC)
+        action: #selector(goToHelpVC)
     )
         questionButton.tintColor = .appYellow
         navigationItem.rightBarButtonItem = questionButton
