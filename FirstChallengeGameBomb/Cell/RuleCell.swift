@@ -12,9 +12,9 @@ class RuleCell: UICollectionViewCell {
     private let ruleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.font = .setFont(.sfProRoundedMedium, size: 20)
         label.numberOfLines = 0
-        label.textColor = .black
+        label.textColor = .PrimaryText
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -33,8 +33,8 @@ class RuleCell: UICollectionViewCell {
     private let numberLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.backgroundColor = .yellow
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.backgroundColor = .CategorySheetBg
+        label.font = .setFont(.sfProRoundedHeavy, size: 16)
         label.numberOfLines = 0
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -47,8 +47,9 @@ class RuleCell: UICollectionViewCell {
         let button = UIButton()
         button.setTitle("Старт игры", for: .normal)
         button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = .setFont(.sfProRoundedMedium, size: 12)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .white
+        button.backgroundColor = .MainViewButton
         button.layer.cornerRadius = 5
         button.layer.masksToBounds = false
         button.layer.shadowColor = UIColor.black.cgColor

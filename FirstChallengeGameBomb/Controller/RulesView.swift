@@ -29,7 +29,7 @@ class RulesView: UIView {
     private let rulesBackgroundView: UIImageView = {
         let view = UIImageView()
         view.isUserInteractionEnabled = true
-        view.backgroundColor = .white
+        view.backgroundColor = .MainSheetBg
         view.image = .topographic3
         view.tintColor = UIColor(red: 1, green: 0.93, blue: 0.75, alpha: 1)
         view.image = view.image?.withRenderingMode(.alwaysTemplate)
@@ -43,8 +43,8 @@ class RulesView: UIView {
     private let ruleTitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
-        label.textColor = .black
+        label.font = .setFont(.sfProRoundedBlack, size: 32)
+        label.textColor = .PrimaryText
         label.text = "Правила игры"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

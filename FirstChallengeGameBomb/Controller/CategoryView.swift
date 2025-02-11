@@ -100,8 +100,16 @@ class CategoriesViewController: UIViewController {
     }
     @objc func goToHelpVC() {
         
-        let helpVC = HelpCategoryView()
-        navigationController?.pushViewController(helpVC, animated: true)
+//        let helpVC = HelpCategoryView()
+//        navigationController?.pushViewController(helpVC, animated: true)
+        let helpView = RulesView()
+        view.addSubview(helpView)
+        NSLayoutConstraint.activate([
+            helpView.topAnchor.constraint(equalTo: view.topAnchor),
+            helpView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            helpView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            helpView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
 }
 
 }
