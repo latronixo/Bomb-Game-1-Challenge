@@ -28,11 +28,6 @@ class MainViewController: BaseViewController {
         element.textAlignment = .center
         element.font = .systemFont(ofSize: 25)
         element.textAlignment = .center
-        
-        //выделим рамкой (для отладки)
-        element.layer.borderWidth = 2.0
-        element.layer.borderColor = UIColor.red.cgColor
-        
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     } ()
@@ -76,15 +71,14 @@ class MainViewController: BaseViewController {
         super.viewDidLoad()
         setupUI()
         setupNavigation()
-        
+        setupConstraints()
     }
 
     private func setupUI () {
+        [firstTitleLabel, secondTitleLabel, bombMainImage]
+            .forEach({ view.addSubview($0) })
       
         view.backgroundColor = .appYellowMainView
-
-        
-        view.addSubview(bombMainImage)
         
         //в вертикальный стек добавляем элементы
 //        labelsStackView.addArrangedSubview(firstTitleLabel)
@@ -121,21 +115,19 @@ class MainViewController: BaseViewController {
 //            mainStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
 //            mainStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
 //            
-//            //закрепляем firstTitleLabel в центре mainStackView
-//            firstTitleLabel.topAnchor.constraint(equalTo: mainStackView.topAnchor, constant: 200),
-//            firstTitleLabel.centerYAnchor.constraint(equalTo: mainStackView.centerYAnchor),
-//            firstTitleLabel.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor),
-//            firstTitleLabel.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor),
-//            
+            //закрепляем firstTitleLabel в центре mainStackView
+            firstTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
+            firstTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//
 //            //закрепляем secondTitleLabel в центре mainStackView
-//            secondTitleLabel.topAnchor.constraint(equalTo: firstTitleLabel.bottomAnchor, constant: 5),
-//            secondTitleLabel.centerYAnchor.constraint(equalTo: mainStackView.centerYAnchor),
-//            secondTitleLabel.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor),
-//            secondTitleLabel.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor),
+            secondTitleLabel.topAnchor.constraint(equalTo: firstTitleLabel.bottomAnchor, constant: 12),
+            secondTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 //            
             //картинку с изображением бомбы размещаем по центру
             bombMainImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             bombMainImage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            bombMainImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            bombMainImage.heightAnchor.constraint(equalTo: bombMainImage.widthAnchor)
 //            bombMainImage.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor),
 //            bombMainImage.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor),
 
