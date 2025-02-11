@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4DC5A5B82D5A4A38001520D8 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = 4DC5A5B72D5A4A38001520D8 /* Settings */; };
+		4D97F3082D59660A006F9463 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = 4D97F3072D59660A006F9463 /* Settings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,14 +55,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DC5A5B82D5A4A38001520D8 /* Settings in Frameworks */,
+				4D97F3082D59660A006F9463 /* Settings in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4DC5A5B62D5A4A38001520D8 /* Frameworks */ = {
+		4D97F3062D59660A006F9463 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -74,7 +74,7 @@
 			children = (
 				4D97F2BF2D595E20006F9463 /* Modules */,
 				6B2020DD2D58D1260008952A /* FirstChallengeGameBomb */,
-				4DC5A5B62D5A4A38001520D8 /* Frameworks */,
+				4D97F3062D59660A006F9463 /* Frameworks */,
 				6B2020DC2D58D1260008952A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -108,7 +108,7 @@
 			);
 			name = FirstChallengeGameBomb;
 			packageProductDependencies = (
-				4DC5A5B72D5A4A38001520D8 /* Settings */,
+				4D97F3072D59660A006F9463 /* Settings */,
 			);
 			productName = FirstChallengeGameBomb;
 			productReference = 6B2020DB2D58D1260008952A /* FirstChallengeGameBomb.app */;
@@ -176,7 +176,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z4PKJ57KTJ;
+				DEVELOPMENT_TEAM = MVZ2D7626T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FirstChallengeGameBomb/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BombGame;
@@ -210,7 +210,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z4PKJ57KTJ;
+				DEVELOPMENT_TEAM = MVZ2D7626T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FirstChallengeGameBomb/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BombGame;
@@ -380,7 +380,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4DC5A5B72D5A4A38001520D8 /* Settings */ = {
+		4D97F3072D59660A006F9463 /* Settings */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Settings;
 		};
