@@ -69,6 +69,7 @@ class CategoryCell: UICollectionViewCell {
         stackView.axis = .vertical
         stackView.spacing = 8
         stackView.alignment = .center
+
         
         contentView.addSubview(stackView)
         contentView.addSubview(selectionOverlay)
@@ -83,6 +84,8 @@ class CategoryCell: UICollectionViewCell {
             stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             stackView.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 8),
             stackView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -8),
+            contentView.heightAnchor.constraint(equalToConstant: 150),
+            contentView.widthAnchor.constraint(equalToConstant: 150),
             
             imageView.heightAnchor.constraint(equalToConstant: 80),
             imageView.widthAnchor.constraint(equalToConstant: 80),
@@ -103,6 +106,14 @@ class CategoryCell: UICollectionViewCell {
         cathergoryLabel.text = category.name
         imageView.image = UIImage(named: category.imageName)
         updateSelectionState(isSelected: category.isSelected)
+    }
+    
+    func configureForHelpVC(with category: Category) {
+        cathergoryLabel.text = category.name
+        imageView.image = UIImage(named: category.imageName)
+        updateSelectionState(isSelected: false)
+        checkmarkView.isHidden = false
+        
     }
     
     private func addShadow() {
