@@ -10,6 +10,8 @@ import Settings
 
 final class FinalGameViewController: BaseViewController {
     
+    private var lastTaskIndex: Int?
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Конец игры"
@@ -110,64 +112,15 @@ final class FinalGameViewController: BaseViewController {
     }
     
     @objc private func restartButtonTapped() {
-        if let navigationController = navigationController {
-            let mainViewController = MainViewController()
-            navigationController.pushViewController(mainViewController, animated: true)
-        }
+        navigationController?.popToRootViewController(animated: true)
     }
-    
+
     @objc private func otherTaskButtonTapped() {
-        descriptionLabel.text = tasks.randomElement()
-    }
-}
-
-
-// Delete before pull!!
-
-extension UIButton {
-    convenience init(title: String, backgroundColor: UIColor) {
-        self.init(type: .system)
-        self.setTitle(title, for: .normal)
-        self.titleLabel?.font = .systemFont(ofSize: 15, weight: .black)
-        self.tintColor = UIColor(named: "TextColor")
-        self.backgroundColor = backgroundColor
-        self.layer.cornerRadius = 10
-        self.translatesAutoresizingMaskIntoConstraints = false
-    }
-}
-
-extension UIColor {
-    static let MainBackground = UIColor(red: 1, green: 0.82, blue: 0.37, alpha: 1)
-    static let GameBackground = UIColor(red: 0.96, green: 0.96, blue: 0.93, alpha: 1)
-    static let MainViewButton = UIColor(red: 0.96, green: 0.96, blue: 0.93, alpha: 1)
-    static let GameViewButton = UIColor(red: 1, green: 0.82, blue: 0.37, alpha: 1)
-    static let MainSheetBg = UIColor(red: 0.96, green: 0.96, blue: 0.93, alpha: 1)
-    static let CategorySheetBg = UIColor(red: 1, green: 0.82, blue: 0.37, alpha: 1)
-    static let CategoryCellBg = UIColor(red: 0.92, green: 0.91, blue: 0.86, alpha: 1)
-    static let CategoryCellSelect = UIColor(red: 0.71, green: 1, blue: 0.65, alpha: 1)
-    static let PrimaryText = UIColor(red: 0.24, green: 0.23, blue: 0.23, alpha: 1)
-    static let SecondaryText = UIColor(red: 0.96, green: 0.96, blue: 0.93, alpha: 1)
- }
-
-extension UIFont {
-    public enum fontType: String {
-        case sfProRoundedBlack = "SFProRounded-Black"
-        case sfProRoundedBold = "SFProRounded-Bold"
-        case sfProRoundedHeavy = "SFProRounded-Heavy"
-        case sfProRoundedLight = "SFProRounded-Light"
-        case sfProRoundedMedium = "SFProRounded-Medium"
-        case sfProRoundedRegular = "SFProRounded-Regular"
-        case sfProRoundedSemibold = "SFProRounded-Semibold"
-        case sfProRoundedThin = "SFProRounded-Thin"
-        case sfProRoundedUltralight = "SFProRounded-Ultralight"
-    }
-
-    static func setFont(_ type: fontType = .sfProRoundedRegular, size: CGFloat = UIFont.systemFontSize) -> UIFont {
-        if let font = UIFont(name: type.rawValue, size: size) {
-            return font
-        } else {
-            print("Шрифт \(type.rawValue) не найден!")
-            return UIFont.systemFont(ofSize: size)
-        }
+        var newIndex: Int
+        repeat {
+            newIndex = Int.random(in: 0..<tasks.count)
+        } while newIndex == lastTaskIndex
+        lastTaskIndex = newIndex
+        descriptionLabel.text = tasks[newIndex]
     }
 }
