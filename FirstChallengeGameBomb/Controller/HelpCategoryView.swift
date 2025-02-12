@@ -135,19 +135,19 @@ class HelpCaregoryViewController: UIViewController {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            rulesLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            rulesLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             rulesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             rulesLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            rulesDescriptionLabel.topAnchor.constraint(equalTo: rulesLabel.bottomAnchor, constant: 20),
+            rulesDescriptionLabel.topAnchor.constraint(equalTo: rulesLabel.bottomAnchor, constant: 10),
             rulesDescriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             rulesDescriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            categoriesLabel.topAnchor.constraint(equalTo: rulesDescriptionLabel.bottomAnchor, constant: 30),
+            categoriesLabel.topAnchor.constraint(equalTo: rulesDescriptionLabel.bottomAnchor, constant: 10),
             categoriesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             categoriesLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            collectionView.topAnchor.constraint(equalTo: categoriesLabel.bottomAnchor, constant: 30),
+            collectionView.topAnchor.constraint(equalTo: categoriesLabel.bottomAnchor, constant: 10),
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
             collectionView.heightAnchor.constraint(equalToConstant: 350),
