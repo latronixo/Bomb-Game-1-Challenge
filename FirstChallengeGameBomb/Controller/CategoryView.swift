@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import Settings
 
 class CategoriesViewController: UIViewController {
+    
+    @UserDefault(key: "selectedCategories", defaultValue: [])
+    private var selectedCategories: [String]
     
     private let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
     private let slideUpTransitioningDelegate = SlideUpTransitioningDelegate()
@@ -37,6 +41,13 @@ class CategoriesViewController: UIViewController {
         setupUI()
         setupNavigation()
         collectionView.allowsMultipleSelection = true
+        
+        // Восстановление выбранных категорий
+         for (index, category) in categories.enumerated() {
+             if selectedCategories.contains(category.name) {
+                 categories[index].isSelected = true
+             }
+         }
     }
     
     private func setupUI() {
@@ -81,65 +92,73 @@ class CategoriesViewController: UIViewController {
         )
         backButton.tintColor = .black
         navigationItem.leftBarButtonItem = backButton
-    
-    let questionButton = UIBarButtonItem(
-        image: UIImage(systemName: "questionmark.circle.fill"),
-        style: .plain,
-        target: self,
-        action: #selector(showHelpVC)
-    )
+        
+        let questionButton = UIBarButtonItem(
+            image: UIImage(systemName: "questionmark.circle.fill"),
+            style: .plain,
+            target: self,
+            action: #selector(showHelpVC)
+        )
         questionButton.tintColor = .appYellow
         navigationItem.rightBarButtonItem = questionButton
-}
+    }
     
     // MARK: - Actions
     
     @objc func backToMainScreen() {
-    navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     @objc private func showHelpVC() {
         let helpVC = HelpCaregoryViewController()
         helpVC.modalPresentationStyle = .custom
         helpVC.transitioningDelegate = slideUpTransitioningDelegate
         present(helpVC, animated: true)
-}
-
-}
-// MARK: - CollectionView DataSource и Delegate
-extension CategoriesViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        categories.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: CategoryCell.identifier,
-            for: indexPath
-        ) as! CategoryCell
         
-        cell.configure(with: categories[indexPath.row])
-        return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.frame.width - 32) / 2
-        return CGSize(width: width, height: 150)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        categories[indexPath.row].isSelected.toggle()
-        collectionView.reloadItems(at: [indexPath])
+}
+    // MARK: - CollectionView DataSource и Delegate
+    extension CategoriesViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            categories.count
+        }
         
-        // Анимация нажатия
-        if let cell = collectionView.cellForItem(at: indexPath) {
-            UIView.animate(withDuration: 0.1, animations: {
-                cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-            }) { _ in
-                UIView.animate(withDuration: 0.1) {
-                    cell.transform = .identity
+        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: CategoryCell.identifier,
+                for: indexPath
+            ) as! CategoryCell
+            
+            cell.configure(with: categories[indexPath.row])
+            return cell
+        }
+        
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            let width = (collectionView.frame.width - 32) / 2
+            return CGSize(width: width, height: 150)
+        }
+        
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            categories[indexPath.row].isSelected.toggle()
+            collectionView.reloadItems(at: [indexPath])
+            
+            // Обновление массива выбранных категорий
+            let category = categories[indexPath.row]
+            if category.isSelected {
+                selectedCategories.append(category.name)
+            } else {
+                selectedCategories.removeAll { $0 == category.name }
+            }
+            
+            // Анимация нажатия
+            if let cell = collectionView.cellForItem(at: indexPath) {
+                UIView.animate(withDuration: 0.1, animations: {
+                    cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+                }) { _ in
+                    UIView.animate(withDuration: 0.1) {
+                        cell.transform = .identity
+                    }
                 }
             }
         }
+        
     }
-    
-}
