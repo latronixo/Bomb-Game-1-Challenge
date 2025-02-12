@@ -97,11 +97,26 @@ class CategoriesViewController: UIViewController {
     @objc func backToMainScreen() {
     navigationController?.popViewController(animated: true)
     }
+<<<<<<< HEAD
     @objc private func showHelpVC() {
         let helpVC = HelpCaregoryViewController()
         helpVC.modalPresentationStyle = .custom
         helpVC.transitioningDelegate = slideUpTransitioningDelegate
         present(helpVC, animated: true)
+=======
+    @objc func goToHelpVC() {
+        
+//        let helpVC = HelpCategoryView()
+//        navigationController?.pushViewController(helpVC, animated: true)
+        let helpView = RulesView()
+        view.addSubview(helpView)
+        NSLayoutConstraint.activate([
+            helpView.topAnchor.constraint(equalTo: view.topAnchor),
+            helpView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            helpView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            helpView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+>>>>>>> ffc5c898b2e405019e1357b35f6fb6eaa65a3fbb
 }
 
 }
