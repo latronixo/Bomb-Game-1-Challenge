@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32EC13482D5BFEBF0035D2F9 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 32EC13472D5BFEBF0035D2F9 /* Lottie */; };
 		4D97F3082D59660A006F9463 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = 4D97F3072D59660A006F9463 /* Settings */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D97F3082D59660A006F9463 /* Settings in Frameworks */,
+				32EC13482D5BFEBF0035D2F9 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +111,7 @@
 			name = FirstChallengeGameBomb;
 			packageProductDependencies = (
 				4D97F3072D59660A006F9463 /* Settings */,
+				32EC13472D5BFEBF0035D2F9 /* Lottie */,
 			);
 			productName = FirstChallengeGameBomb;
 			productReference = 6B2020DB2D58D1260008952A /* FirstChallengeGameBomb.app */;
@@ -138,6 +141,9 @@
 			);
 			mainGroup = 6B2020D22D58D1260008952A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				32EC13462D5BFEBF0035D2F9 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6B2020DC2D58D1260008952A /* Products */;
 			projectDirPath = "";
@@ -379,7 +385,23 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		32EC13462D5BFEBF0035D2F9 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		32EC13472D5BFEBF0035D2F9 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 32EC13462D5BFEBF0035D2F9 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
 		4D97F3072D59660A006F9463 /* Settings */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Settings;
