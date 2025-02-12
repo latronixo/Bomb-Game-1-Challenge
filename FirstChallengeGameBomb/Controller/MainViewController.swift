@@ -119,7 +119,7 @@ class MainViewController: BaseViewController {
             image: UIImage(systemName: "questionmark.circle.fill"),
             style: .plain,
             target: self,
-            action: #selector(goToHelpVC)
+            action: #selector(goRules)
         )
     
         questionButton.tintColor = .appRed
@@ -133,9 +133,11 @@ class MainViewController: BaseViewController {
 //        navigationController?.pushViewController(settingsVC, animated: true)
     }
 
-    @objc func goToHelpVC() {
-        let helpVC = HelpCaregoryViewController()
-        navigationController?.pushViewController(helpVC, animated: true)
+    @objc func goRules() {
+        let rulesVC = UIViewController()
+        rulesVC.view = RulesView()
+        rulesVC.modalPresentationStyle = .custom
+        present(rulesVC, animated: true)
     }
 
     @objc private func startGameButtonTapped () {
