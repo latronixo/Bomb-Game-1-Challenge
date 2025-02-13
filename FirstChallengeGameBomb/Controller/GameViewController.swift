@@ -13,8 +13,10 @@ class GameViewController: UIViewController {
 
     private let gameBrain = GameBrain()
     private var timer: Timer?
-    private var runCountTimer = 10
-    private var player: AVAudioPlayer?
+    private var runCountTimer = 30
+    private var playerSound: AVAudioPlayer?
+    private var playerMusic: AVAudioPlayer?
+
     
     private let gameBackgroundView: UIImageView = {
         let view = UIImageView()
@@ -85,9 +87,6 @@ class GameViewController: UIViewController {
     
 
     private func configureUI() {
-        let attributes = [NSAttributedString.Key.font: UIFont.setFont(.sfProRoundedBlack, size: 30)]
-        UINavigationBar.appearance().titleTextAttributes = attributes
-        
         title = "Игра"
         
         navigationItem.leftBarButtonItem = backButton
@@ -118,31 +117,36 @@ class GameViewController: UIViewController {
         bombAnimateView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1.0).isActive = true
         bombAnimateView.heightAnchor.constraint(equalTo: bombAnimateView.widthAnchor, multiplier: 1.0).isActive = true
     }
+    
+    // MARK: - Кнопки в UI
 
     @objc func backButtonAction() {
-        print("backButtonAction")
+        
     }
     
     @objc func pauseButtonAction() {
-        print("pauseButtonAction")
         if timer != nil {
             stopTimer()
+            stopBombSound()
         } else {
             startTimer()
+            playBombSound()
         }
     }
     
     @objc func startGameButtonAction(sender: UIButton) {
-        print("startGameButtonAction")
         mainLabel.text = gameBrain.getQuestionText()
         mainLabel.font = .setFont(.sfProRoundedBlack, size: 28)
         startGameButton.isHidden = true
         startLoopAnimate()
         startTimer()
+        playBombSound()
+        playMusic()
     }
     
+    // MARK: - Работа с таймером
+    
     @objc func updateTimer() {
-        print("updateTimer / runCountTimer: \(runCountTimer)")
         runCountTimer -= 1
         
         if runCountTimer == 0 {
@@ -151,7 +155,6 @@ class GameViewController: UIViewController {
     }
     
     private func startTimer() {
-        print("startTimer")
         if timer == nil {
           let timer = Timer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
           RunLoop.current.add(timer, forMode: .common)
@@ -161,7 +164,6 @@ class GameViewController: UIViewController {
         
         if bombAnimateView.isAnimationPlaying == false {
             startLoopAnimate()
-            playBombSound()
         }
     }
     
@@ -174,19 +176,44 @@ class GameViewController: UIViewController {
         }
     }
     
+    // MARK: - Работа с анимацией
+    
     private func startLoopAnimate() {
         bombAnimateView.play(fromFrame: 0, toFrame: 12, loopMode: .loop)
     }
     
+    // MARK: - Работа со звуком бомбы
+    
     func playBombSound() {
         let url = Bundle.main.url(forResource: "tikane-taymera-bombyi", withExtension: "mp3")
-        player = try! AVAudioPlayer(contentsOf: url!)
-        player?.numberOfLoops =  -1
-        player?.play()
+        playerSound = try! AVAudioPlayer(contentsOf: url!)
+        playerSound?.numberOfLoops =  -1
+        playerSound?.play()
     }
     
+    func stopBombSound() {
+        playerSound?.stop()
+    }
+    
+    
+    // MARK: - Работа с фоновой музыкой
+    
+    func playMusic() {
+        let url = Bundle.main.url(forResource: "muzyika-dlya-sna-relaks", withExtension: "mp3")
+        playerMusic = try! AVAudioPlayer(contentsOf: url!)
+        playerMusic?.numberOfLoops =  -1
+        playerMusic?.play()
+    }
+    
+    func stopMusic() {
+        playerMusic?.stop()
+    }
+    
+    // MARK: - Конец игры
+    
     private func finishTime() {
-        print("finishTime")
         stopTimer()
+        stopBombSound()
+        stopMusic()
     }
 }
