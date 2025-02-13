@@ -39,14 +39,14 @@ final class FinalGameViewController: BaseViewController {
     
     private let otherTaskButton: UIButton = {
         let button = UIButton(title: "Другое задание", backgroundColor: .GameViewButton)
-        button.titleLabel?.font = UIFont(name: "SF Pro Display", size: 20)
+        button.titleLabel?.font = .setFont(.sfProRoundedMedium, size: 20)
         button.setTitleColor(.PrimaryText, for: .normal)
         return button
     }()
     
     private let restartButton: UIButton = {
         let button = UIButton(title: "Начать заново", backgroundColor: .GameViewButton)
-        button.titleLabel?.font = UIFont(name: "SF Pro Display", size: 20)
+        button.titleLabel?.font = .setFont(.sfProRoundedMedium, size: 20)
         button.setTitleColor(.PrimaryText, for: .normal)
         return button
     }()
