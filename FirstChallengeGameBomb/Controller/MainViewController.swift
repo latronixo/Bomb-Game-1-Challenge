@@ -134,15 +134,14 @@ class MainViewController: BaseViewController {
     }
 
     @objc func goRules() {
-        let rulesVC = UIViewController()
-        rulesVC.view = RulesView()
+        let rulesVC = RulesViewController()
         rulesVC.modalPresentationStyle = .custom
         present(rulesVC, animated: true)
     }
 
     @objc private func startGameButtonTapped () {
-//        let gameVC = GameView()
-//        navigationController?.pushViewController(settingsVC, animated: true)
+        let gameVC = GameViewController()
+        navigationController?.pushViewController(gameVC, animated: true)
     }
 
     @objc private func categoriesButtonTapped () {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RulesView: UIView {
+class RulesViewController: UIViewController {
     
     private let rulesModel = RulesModel()
     private var panGesture = UIPanGestureRecognizer()
@@ -64,53 +64,48 @@ class RulesView: UIView {
         return collectionView
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .clear
-        translatesAutoresizingMaskIntoConstraints = false
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .clear
         collectionRulesView.delegate = self
         collectionRulesView.dataSource = self
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         configureUI()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     private func configureUI() {
-        addSubview(backgroundCloseButton)
+        view.addSubview(backgroundCloseButton)
         backgroundCloseButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        backgroundCloseButton.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        backgroundCloseButton.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        backgroundCloseButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        backgroundCloseButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        backgroundCloseButton.leftAnchor.constraint(equalTo:view.leftAnchor).isActive = true
+        backgroundCloseButton.rightAnchor.constraint(equalTo:view.rightAnchor).isActive = true
+        backgroundCloseButton.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        backgroundCloseButton.bottomAnchor.constraint(equalTo:view.bottomAnchor).isActive = true
 
-        addSubview(rulesBackgroundView)
+        view.addSubview(rulesBackgroundView)
         rulesBackgroundView.addGestureRecognizer(panGesture)
         rulesBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-        rulesBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: 200).isActive = true
-        rulesBackgroundView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
-        rulesBackgroundView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
-        rulesBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+        rulesBackgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
+        rulesBackgroundView.leftAnchor.constraint(equalTo:view.leftAnchor, constant: 0).isActive = true
+        rulesBackgroundView.rightAnchor.constraint(equalTo:view.rightAnchor, constant: 0).isActive = true
+        rulesBackgroundView.bottomAnchor.constraint(equalTo:view.bottomAnchor, constant: 0).isActive = true
 
-        addSubview(separatorView)
+        view.addSubview(separatorView)
         separatorView.topAnchor.constraint(equalTo: rulesBackgroundView.topAnchor, constant: 15).isActive = true
-        separatorView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0).isActive = true
+        separatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         separatorView.heightAnchor.constraint(equalToConstant: 4).isActive = true
         separatorView.widthAnchor.constraint(equalToConstant: 70).isActive = true
 
-        addSubview(ruleTitleLabel)
+        view.addSubview(ruleTitleLabel)
         ruleTitleLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 6).isActive = true
-        ruleTitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
-        ruleTitleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
+        ruleTitleLabel.leftAnchor.constraint(equalTo:view.leftAnchor, constant: 0).isActive = true
+        ruleTitleLabel.rightAnchor.constraint(equalTo:view.rightAnchor, constant: 0).isActive = true
         ruleTitleLabel.heightAnchor.constraint(equalToConstant: 60).isActive = true
 
-        addSubview(collectionRulesView)
+        view.addSubview(collectionRulesView)
         collectionRulesView.topAnchor.constraint(equalTo: ruleTitleLabel.bottomAnchor, constant: 6).isActive = true
-        collectionRulesView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
-        collectionRulesView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
-        collectionRulesView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+        collectionRulesView.leftAnchor.constraint(equalTo:view.leftAnchor, constant: 0).isActive = true
+        collectionRulesView.rightAnchor.constraint(equalTo:view.rightAnchor, constant: 0).isActive = true
+        collectionRulesView.bottomAnchor.constraint(equalTo:view.bottomAnchor, constant: 0).isActive = true
     }
     
     private func calculateTextHeight(text: String, font: UIFont, width: CGFloat) -> CGFloat {
@@ -130,17 +125,17 @@ class RulesView: UIView {
     }
     
     @objc private func handlePan(_ gesture: UIPanGestureRecognizer) {
-        let translation = gesture.translation(in: self)
+        let translation = gesture.translation(in: self.view)
 
         switch gesture.state {
         case .changed:
-            self.transform = CGAffineTransform(translationX: 0, y: max(0, translation.y))
+            self.view.transform = CGAffineTransform(translationX: 0, y: max(0, translation.y))
         case .ended, .cancelled:
             if translation.y > 250 {
                 removeView()
             } else {
                 UIView.animate(withDuration: 0.3) {
-                    self.transform = .identity
+                    self.view.transform = .identity
                 }
             }
         default:
@@ -150,22 +145,23 @@ class RulesView: UIView {
     
     private func removeView() {
         UIView.animate(withDuration: 0.6, animations: {
-            self.transform = CGAffineTransform(translationX: 0, y: self.frame.height)
+            self.view.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height)
         },completion: {_ in
-            self.removeFromSuperview()
+            self.view.removeFromSuperview()
+            self.dismiss(animated: true)
         })
     }
 }
 
 //MARK: UICollectionViewDelegate
 
-extension RulesView: UICollectionViewDelegate {
+extension RulesViewController: UICollectionViewDelegate {
 
 }
 
 //MARK: UICollectionViewDelegate
 
-extension RulesView: UICollectionViewDataSource {
+extension RulesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return rulesModel.rules.count
     }
@@ -179,7 +175,7 @@ extension RulesView: UICollectionViewDataSource {
 
 //MARK: UICollectionViewDelegateFlowLayout
 
-extension RulesView: UICollectionViewDelegateFlowLayout {
+extension RulesViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = calculateTextHeight(text: rulesModel.rules[indexPath.row],
