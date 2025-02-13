@@ -17,18 +17,18 @@ extension SettingsTableManager: @preconcurrency ISettingsTableManager {
         tableView?.dataSource = self
         
         tableView?.register(
-            SelectionTitleTableViewSection.self,
-            forCellReuseIdentifier: SelectionTitleTableViewSection.reuseIdentifier
+            SelectionTitleTableViewCell.self,
+            forCellReuseIdentifier: SelectionTitleTableViewCell.reuseIdentifier
         )
         
         tableView?.register(
-            ToggleTableViewSection.self,
-            forCellReuseIdentifier: ToggleTableViewSection.reuseIdentifier
+            ToggleSettingsTableViewCell.self,
+            forCellReuseIdentifier: ToggleSettingsTableViewCell.reuseIdentifier
         )
         
         tableView?.register(
-            DisclosureTableViewSection.self,
-            forCellReuseIdentifier: DisclosureTableViewSection.reuseIdentifier
+            DisclosureSettingsTableViewCell.self,
+            forCellReuseIdentifier: DisclosureSettingsTableViewCell.reuseIdentifier
         )
     }
     
@@ -73,25 +73,21 @@ extension SettingsTableManager: UITableViewDataSource {
         switch section {
         case .titleSelection(_, let viewModels):
             guard let cell = tableView.dequeueReusableCell(
-                    withIdentifier: SelectionTitleTableViewSection.reuseIdentifier
-                  ) as? SelectionTitleTableViewSection else { return .init() }
+                    withIdentifier: SelectionTitleTableViewCell.reuseIdentifier
+                  ) as? SelectionTitleTableViewCell else { return .init() }
             cell.fill(viewModels)
             return cell
         case .disclosureSection(let viewModels):
             guard let cell = tableView.dequeueReusableCell(
-                    withIdentifier: DisclosureTableViewSection.reuseIdentifier
-                  ) as? DisclosureTableViewSection else { return .init() }
-            tableView.layoutIfNeeded()
-            tableView.beginUpdates()
+                    withIdentifier: DisclosureSettingsTableViewCell.reuseIdentifier
+                  ) as? DisclosureSettingsTableViewCell else { return .init() }
             cell.fill(viewModels)
-            tableView.endUpdates()
             return cell
         case .toggleSection(let viewModels):
-            guard let viewModel = viewModels[safe: indexPath.row],
-                  let cell = tableView.dequeueReusableCell(
-                    withIdentifier: ToggleTableViewSection.reuseIdentifier
-                  ) as? ToggleTableViewSection else { return .init() }
-            cell.fill(viewModel)
+            guard let cell = tableView.dequeueReusableCell(
+                    withIdentifier: ToggleSettingsTableViewCell.reuseIdentifier
+                  ) as? ToggleSettingsTableViewCell else { return .init() }
+            cell.fill(viewModels)
             return cell
         }
     }
