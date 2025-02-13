@@ -90,6 +90,12 @@ class GameViewController: UIViewController {
     private func configureUI() {
         title = "Игра"
         
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.setFont(.sfProRoundedBlack, size: 28)
+        ]
+            
+        navigationController?.navigationBar.titleTextAttributes = attributes
+        
         navigationItem.leftBarButtonItem = backButton
         navigationItem.rightBarButtonItem = pauseButton
 
@@ -122,7 +128,8 @@ class GameViewController: UIViewController {
     // MARK: - Кнопки в UI
 
     @objc func backButtonAction() {
-        
+        stopAllFunc()
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func pauseButtonAction() {
@@ -169,7 +176,6 @@ class GameViewController: UIViewController {
     }
     
     private func stopTimer() {
-        print("stopTimer")
         timer?.invalidate()
         timer = nil
         if runCountTimer > 0 {
@@ -180,7 +186,6 @@ class GameViewController: UIViewController {
     // MARK: - Работа с анимацией
     
     private func startLoopAnimate() {
-//        bombAnimateView.play(fromFrame: 0, toFrame: 12, loopMode: .loop)
         bombAnimateView.play()
     }
     
@@ -214,6 +219,12 @@ class GameViewController: UIViewController {
     // MARK: - Конец игры
     
     private func finishTime() {
+        stopAllFunc()
+        let FinalGameVC = FinalGameViewController()
+        navigationController?.pushViewController(FinalGameVC, animated: true)
+    }
+    
+    private func stopAllFunc() {
         stopTimer()
         stopBombSound()
         stopMusic()

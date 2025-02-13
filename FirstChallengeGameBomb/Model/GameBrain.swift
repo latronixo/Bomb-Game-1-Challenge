@@ -6,8 +6,12 @@
 //
 
 import Foundation
+import Settings
 
 struct GameBrain {
+    
+    @UserDefault(key: "selectedCategories", defaultValue: [])
+    private var selectedCategories: [String]
     
     let questions = [
         
@@ -79,11 +83,14 @@ struct GameBrain {
         Question(text: "Назовите режиссёра известного фильма", category: "Знаменитости"),
         Question(text: "Назовите знаменитого комика", category: "Знаменитости")
     ]
-
     
     var questionNumber = 0
     
     func getQuestionText() -> String {
-        return questions[Int.random(in: 0..<questions.count)].text
+        let filterQuestions = questions.filter { question in
+            selectedCategories.contains(where: { question.category.contains($0) })
+        }
+
+        return filterQuestions[Int.random(in: 0..<filterQuestions.count)].text
     }
 }
