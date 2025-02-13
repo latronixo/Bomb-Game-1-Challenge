@@ -71,9 +71,10 @@ class GameViewController: UIViewController {
     
     private let bombAnimateView: LottieAnimationView = {
         var animationView = LottieAnimationView()
-        animationView = .init(name: "Animation - 1739310950383")
+        animationView = .init(name: "Animation - 1739445823982")
         animationView.contentMode = .scaleAspectFit
-        animationView.animationSpeed = 0.5
+        animationView.animationSpeed = 1
+        animationView.loopMode = .loop
         animationView.translatesAutoresizingMaskIntoConstraints = false
         return animationView
     }()
@@ -179,7 +180,8 @@ class GameViewController: UIViewController {
     // MARK: - Работа с анимацией
     
     private func startLoopAnimate() {
-        bombAnimateView.play(fromFrame: 0, toFrame: 12, loopMode: .loop)
+//        bombAnimateView.play(fromFrame: 0, toFrame: 12, loopMode: .loop)
+        bombAnimateView.play()
     }
     
     // MARK: - Работа со звуком бомбы
@@ -215,5 +217,6 @@ class GameViewController: UIViewController {
         stopTimer()
         stopBombSound()
         stopMusic()
+        bombAnimateView.stop()
     }
 }
