@@ -7,10 +7,12 @@
 
 import UIKit
 import Settings
+import AVFoundation
 
 final class FinalGameViewController: BaseViewController {
     
     private var lastTaskIndex: Int?
+    private var playerMusic: AVAudioPlayer?
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -39,14 +41,14 @@ final class FinalGameViewController: BaseViewController {
     
     private let otherTaskButton: UIButton = {
         let button = UIButton(title: "Другое задание", backgroundColor: .GameViewButton)
-        button.titleLabel?.font = UIFont(name: "SF Pro Display", size: 20)
+        button.titleLabel?.font = .setFont(.sfProRoundedMedium, size: 20)
         button.setTitleColor(.PrimaryText, for: .normal)
         return button
     }()
     
     private let restartButton: UIButton = {
         let button = UIButton(title: "Начать заново", backgroundColor: .GameViewButton)
-        button.titleLabel?.font = UIFont(name: "SF Pro Display", size: 20)
+        button.titleLabel?.font = .setFont(.sfProRoundedMedium, size: 20)
         button.setTitleColor(.PrimaryText, for: .normal)
         return button
     }()
@@ -67,54 +69,61 @@ final class FinalGameViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        navigationItem.hidesBackButton = true
         restartButton.addTarget(self, action: #selector(restartButtonTapped), for: .touchUpInside)
         otherTaskButton.addTarget(self, action: #selector(otherTaskButtonTapped), for: .touchUpInside)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        playMusic()
     }
     
     private func setupUI() {
         view.backgroundColor = .white
         
+        let buttonsStackView = UIStackView(arrangedSubviews: [otherTaskButton, restartButton])
+        buttonsStackView.axis = .vertical
+        buttonsStackView.spacing = 16
+        buttonsStackView.alignment = .fill
+        
         view.addSubview(titleLabel)
         view.addSubview(gameImageView)
         view.addSubview(descriptionLabel)
-        view.addSubview(otherTaskButton)
-        view.addSubview(restartButton)
+        view.addSubview(buttonsStackView)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         gameImageView.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        otherTaskButton.translatesAutoresizingMaskIntoConstraints = false
-        restartButton.translatesAutoresizingMaskIntoConstraints = false
+        buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 70),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -10),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            gameImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
+            gameImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
             gameImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            gameImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
-            gameImageView.heightAnchor.constraint(equalTo: gameImageView.widthAnchor),
+            gameImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 57),
+            gameImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -57),
             
             descriptionLabel.topAnchor.constraint(equalTo: gameImageView.bottomAnchor, constant: 34),
             descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
-            restartButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
-            restartButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 23),
-            restartButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -23),
-            restartButton.heightAnchor.constraint(equalToConstant: 55),
+            buttonsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            buttonsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 23),
+            buttonsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -23),
             
-            otherTaskButton.bottomAnchor.constraint(equalTo: restartButton.topAnchor, constant: -16),
-            otherTaskButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 23),
-            otherTaskButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -23),
-            otherTaskButton.heightAnchor.constraint(equalToConstant: 55)
+            otherTaskButton.heightAnchor.constraint(equalToConstant: 55),
+            restartButton.heightAnchor.constraint(equalToConstant: 55)
         ])
     }
     
     @objc private func restartButtonTapped() {
-        navigationController?.popToRootViewController(animated: true)
+//        let gameViewController = GameViewController()
+//           navigationController?.pushViewController(gameViewController, animated: true)
     }
-
+    
     @objc private func otherTaskButtonTapped() {
         var newIndex: Int
         repeat {
@@ -122,5 +131,15 @@ final class FinalGameViewController: BaseViewController {
         } while newIndex == lastTaskIndex
         lastTaskIndex = newIndex
         descriptionLabel.text = tasks[newIndex]
+    }
+    
+    private func playMusic() {
+        guard let url = Bundle.main.url(forResource: "Boom", withExtension: "mp3") else { return }
+        do {
+            playerMusic = try AVAudioPlayer(contentsOf: url)
+            playerMusic?.play()
+        } catch {
+            print("Ошибка воспроизведения звука: \(error.localizedDescription)")
+        }
     }
 }
