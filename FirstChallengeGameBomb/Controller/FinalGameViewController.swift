@@ -102,7 +102,7 @@ final class FinalGameViewController: BaseViewController {
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             gameImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
-            gameImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4),
+            gameImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4),  
             gameImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             gameImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 57),
             gameImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -57),
