@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundMainScreen" translatesAutoresizingMaskIntoConstraints="NO" id="RGp-ph-4Yh">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundMainScreen" translatesAutoresizingMaskIntoConstraints="NO" id="RGp-ph-4Yh">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bombMainScreen" translatesAutoresizingMaskIntoConstraints="NO" id="Shi-MX-49J">
@@ -30,10 +30,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="RGp-ph-4Yh" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Cgm-Gu-OMG"/>
+                            <constraint firstItem="RGp-ph-4Yh" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="Cgm-Gu-OMG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Shi-MX-49J" secondAttribute="trailing" constant="50" id="M3r-bQ-nOW"/>
                             <constraint firstItem="Shi-MX-49J" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="SNZ-HA-mW9"/>
-                            <constraint firstItem="RGp-ph-4Yh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="XH0-yC-E2e"/>
+                            <constraint firstItem="RGp-ph-4Yh" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="XH0-yC-E2e"/>
                             <constraint firstAttribute="bottom" secondItem="RGp-ph-4Yh" secondAttribute="bottom" id="hVw-7z-FpX"/>
                             <constraint firstItem="RGp-ph-4Yh" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="hVw-Wt-pUM"/>
                             <constraint firstItem="Shi-MX-49J" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="jmN-3g-ksE"/>
