@@ -136,9 +136,11 @@ class GameViewController: UIViewController {
         if timer != nil {
             stopTimer()
             stopBombSound()
+            stopMusic()
         } else {
             startTimer()
             playBombSound()
+            playMusic()
         }
     }
     
