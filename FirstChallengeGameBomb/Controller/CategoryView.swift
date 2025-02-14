@@ -16,7 +16,7 @@ class CategoriesViewController: UIViewController {
     private let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
     private let slideUpTransitioningDelegate = SlideUpTransitioningDelegate()
     private var categories: [Category] = [
-        Category(name: "O Разном", imageName: "smileSquare", isSelected: false),
+        Category(name: "О Разном", imageName: "smileSquare", isSelected: false),
         Category(name: "Спорт и Хобби", imageName: "sport", isSelected: false),
         Category(name: "Про Жизнь", imageName: "message", isSelected: false),
         Category(name: "Знаменитости", imageName: "star", isSelected: false),
