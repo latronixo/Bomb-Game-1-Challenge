@@ -120,8 +120,8 @@ final class FinalGameViewController: BaseViewController {
     }
     
     @objc private func restartButtonTapped() {
-//        let gameViewController = GameViewController()
-//           navigationController?.pushViewController(gameViewController, animated: true)
+        let gameViewController = GameViewController()
+        navigationController?.pushViewController(gameViewController, animated: true)
     }
     
     @objc private func otherTaskButtonTapped() {
