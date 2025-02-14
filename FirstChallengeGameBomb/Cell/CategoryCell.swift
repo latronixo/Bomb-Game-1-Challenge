@@ -86,7 +86,6 @@ class CategoryCell: UICollectionViewCell {
             stackView.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 8),
             stackView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -8),
             contentView.heightAnchor.constraint(equalToConstant: 150),
-            contentView.widthAnchor.constraint(equalToConstant: 150),
             
             imageView.heightAnchor.constraint(equalToConstant: 80),
             imageView.widthAnchor.constraint(equalToConstant: 80),

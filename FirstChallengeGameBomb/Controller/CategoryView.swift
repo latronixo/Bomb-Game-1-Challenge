@@ -52,6 +52,13 @@ class CategoriesViewController: UIViewController {
     
     private func setupUI() {
         title = "Категории"
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.setFont(.sfProRoundedBlack, size: 28)
+        ]
+            
+        navigationController?.navigationBar.titleTextAttributes = attributes
+        
         view.addSubview(backgroundImage)
         setupCollectionView()
         
