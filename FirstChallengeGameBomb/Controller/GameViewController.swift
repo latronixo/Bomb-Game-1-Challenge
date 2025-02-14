@@ -129,7 +129,10 @@ class GameViewController: UIViewController {
 
     @objc func backButtonAction() {
         stopAllFunc()
-        navigationController?.popViewController(animated: true)
+        //navigationController?.popViewController(animated: true)
+        let mainViewController = MainViewController()
+        navigationController?.pushViewController(mainViewController, animated: true)
+
     }
     
     @objc func pauseButtonAction() {
