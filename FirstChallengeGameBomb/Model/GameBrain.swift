@@ -13,6 +13,9 @@ struct GameBrain {
     @UserDefault(key: "selectedCategories", defaultValue: [])
     private var selectedCategories: [String]
     
+    @UserDefault(key: "сompletedQuestions", defaultValue: [])
+    private var сompletedQuestions: [String]
+    
     let questions = [
         
         // О разном
@@ -84,15 +87,30 @@ struct GameBrain {
         Question(text: "Назовите знаменитого комика", category: "Знаменитости")
     ]
         
-    func getQuestionText() -> String {
+    mutating func getQuestionText() -> String {
+        
+        // Выбираем вопросы которые соотвествуют выбранным категориям
         let filterQuestions = questions.filter { question in
             selectedCategories.contains(where: { question.category.contains($0) })
         }
-
+        
+        // Из отфильтрованных вопросов удаляем те, что уже были
+        var questionsWithoutRepetition = filterQuestions.filter { question in
+            !сompletedQuestions.contains(question.text)
+        }
+        
+        // Если уже все вопросы были, то чистим сохраненные и возвращаем весь список
+        if questionsWithoutRepetition.isEmpty {
+            questionsWithoutRepetition = filterQuestions
+            сompletedQuestions.removeAll()
+        }
+            
         if filterQuestions.isEmpty {
             return ""
         } else {
-            return filterQuestions[Int.random(in: 0..<filterQuestions.count)].text
+            let question = questionsWithoutRepetition[Int.random(in: 0..<questionsWithoutRepetition.count)].text
+            сompletedQuestions.append(question)
+            return question
         }
     }
 }

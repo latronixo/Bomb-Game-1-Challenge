@@ -11,7 +11,7 @@ import AVFoundation
 
 class GameViewController: UIViewController {
 
-    private let gameBrain = GameBrain()
+    private var gameBrain = GameBrain()
     private var timer: Timer?
     private var runCountTimer = 30
     private var playerSound: AVAudioPlayer?
