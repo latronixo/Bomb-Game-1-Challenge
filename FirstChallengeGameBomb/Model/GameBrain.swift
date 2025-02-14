@@ -84,7 +84,41 @@ struct GameBrain {
         Question(text: "Назовите ведущего известного телешоу", category: "Знаменитости"),
         Question(text: "Назовите спортсмена, который участвовал в Олимпийских играх", category: "Знаменитости"),
         Question(text: "Назовите режиссёра известного фильма", category: "Знаменитости"),
-        Question(text: "Назовите знаменитого комика", category: "Знаменитости")
+        Question(text: "Назовите знаменитого комика", category: "Знаменитости"),
+        
+        // Искусство и кино
+        Question(text: "Назовите известный фильм", category: "Искусство и Кино"),
+        Question(text: "Назовите популярного режиссёра", category: "Искусство и Кино"),
+        Question(text: "Назовите известного художника", category: "Искусство и Кино"),
+        Question(text: "Назовите жанр кинематографа", category: "Искусство и Кино"),
+        Question(text: "Назовите известный музей", category: "Искусство и Кино"),
+        Question(text: "Назовите известного актёра", category: "Искусство и Кино"),
+        Question(text: "Назовите музыкальный инструмент", category: "Искусство и Кино"),
+        Question(text: "Назовите известную театральную пьесу", category: "Искусство и Кино"),
+        Question(text: "Назовите анимационный фильм", category: "Искусство и Кино"),
+        Question(text: "Назовите произведение классической музыки", category: "Искусство и Кино"),
+        Question(text: "Назовите жанр живописи", category: "Искусство и Кино"),
+        Question(text: "Назовите известную кинопремию", category: "Искусство и Кино"),
+        Question(text: "Назовите всемирно известную картину", category: "Искусство и Кино"),
+        Question(text: "Назовите вид танца", category: "Искусство и Кино"),
+        Question(text: "Назовите популярный сериал", category: "Искусство и Кино"),
+
+        // Природа
+        Question(text: "Назовите дикое животное", category: "Природа"),
+        Question(text: "Назовите вид дерева", category: "Природа"),
+        Question(text: "Назовите океан или море", category: "Природа"),
+        Question(text: "Назовите птицу, которая умеет говорить", category: "Природа"),
+        Question(text: "Назовите известное природное явление", category: "Природа"),
+        Question(text: "Назовите цветок", category: "Природа"),
+        Question(text: "Назовите национальный парк", category: "Природа"),
+        Question(text: "Назовите вымирающий вид животных", category: "Природа"),
+        Question(text: "Назовите вид насекомого", category: "Природа"),
+        Question(text: "Назовите природную катастрофу", category: "Природа"),
+        Question(text: "Назовите континент", category: "Природа"),
+        Question(text: "Назовите реку", category: "Природа"),
+        Question(text: "Назовите горный хребет", category: "Природа"),
+        Question(text: "Назовите климатический пояс", category: "Природа"),
+        Question(text: "Назовите животное, обитающее в Арктике", category: "Природа")
     ]
         
     mutating func getQuestionText() -> String {
