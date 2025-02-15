@@ -17,6 +17,7 @@ class MainViewController: BaseViewController {
         element.text = "ИГРА ДЛЯ КОМПАНИИ"
         element.textAlignment = .center
         element.font = .setFont(.sfProRoundedBlack, size: 32)
+        element.textColor = .PrimaryText
         element.textAlignment = .center
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -27,6 +28,7 @@ class MainViewController: BaseViewController {
         element.text = "БОМБА"
         element.textAlignment = .center
         element.font = .setFont(.sfProRoundedBlack, size: 50)
+        element.textColor = .PrimaryText
         element.textAlignment = .center
         
         element.translatesAutoresizingMaskIntoConstraints = false
@@ -117,6 +119,7 @@ class MainViewController: BaseViewController {
     
         let questionButton = UIBarButtonItem(
             image: UIImage(systemName: "questionmark.circle.fill"),
+            //tintColor = .PrimaryText,
             style: .plain,
             target: self,
             action: #selector(goRules)
