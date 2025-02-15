@@ -11,6 +11,7 @@ import AVFoundation
 
 final class FinalGameViewController: BaseViewController {
     
+    private var settings = SettingsBrain()
     private var lastTaskIndex: Int?
     private var playerMusic: AVAudioPlayer?
     
@@ -71,7 +72,9 @@ final class FinalGameViewController: BaseViewController {
         setupUI()
         navigationItem.hidesBackButton = true
         restartButton.addTarget(self, action: #selector(restartButtonTapped), for: .touchUpInside)
-        otherTaskButton.addTarget(self, action: #selector(otherTaskButtonTapped), for: .touchUpInside)
+        if settings.getTasks() {
+            otherTaskButton.addTarget(self, action: #selector(otherTaskButtonTapped), for: .touchUpInside)
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -82,14 +85,22 @@ final class FinalGameViewController: BaseViewController {
     private func setupUI() {
         view.backgroundColor = .white
         
-        let buttonsStackView = UIStackView(arrangedSubviews: [otherTaskButton, restartButton])
+        //если выбрана опция "Игра с заданиями", то задание и кнопку "Другое задание" отображаем
+        let buttons: [UIView]
+        if settings.getTasks() {
+            buttons = [otherTaskButton, restartButton]
+        } else {
+            buttons = [restartButton]
+        }
+        let buttonsStackView = UIStackView(arrangedSubviews: buttons)
+        otherTaskButton
         buttonsStackView.axis = .vertical
         buttonsStackView.spacing = 16
         buttonsStackView.alignment = .fill
         
         view.addSubview(titleLabel)
         view.addSubview(gameImageView)
-        view.addSubview(descriptionLabel)
+        if settings.getTasks() { view.addSubview(descriptionLabel) }
         view.addSubview(buttonsStackView)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -107,17 +118,23 @@ final class FinalGameViewController: BaseViewController {
             gameImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 57),
             gameImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -57),
             
-            descriptionLabel.topAnchor.constraint(equalTo: gameImageView.bottomAnchor, constant: 34),
-            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            
             buttonsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
             buttonsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 23),
             buttonsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -23),
             
-            otherTaskButton.heightAnchor.constraint(equalToConstant: 55),
             restartButton.heightAnchor.constraint(equalToConstant: 55)
         ])
+        
+        if settings.getTasks() {
+            NSLayoutConstraint.activate([
+                descriptionLabel.topAnchor.constraint(equalTo: gameImageView.bottomAnchor, constant: 34),
+                descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                
+                otherTaskButton.heightAnchor.constraint(equalToConstant: 55),
+
+            ])
+        }
     }
     
     @objc private func restartButtonTapped() {
@@ -135,7 +152,7 @@ final class FinalGameViewController: BaseViewController {
     }
     
     private func playMusic() {
-        guard let url = Bundle.main.url(forResource: "Boom", withExtension: "mp3") else { return }
+        guard let url = Bundle.main.url(forResource: settings.getSoundBoobBoom(), withExtension: "mp3") else { return }
         do {
             playerMusic = try AVAudioPlayer(contentsOf: url)
             playerMusic?.play()

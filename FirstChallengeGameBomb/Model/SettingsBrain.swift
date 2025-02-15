@@ -12,12 +12,19 @@ struct SettingsBrain {
     var settings = Settings()
     var selectedTime: Int = 0
     
-    var times: [Settings.Time] = [
+    var times = [
         Settings.Time(text: "Короткое", countSeconds: 10),
         Settings.Time(text: "Среднее", countSeconds: 20),
         Settings.Time(text: "Длинное", countSeconds: 45),
         Settings.Time(text: "Случайное", countSeconds: Int.random(in: 10...45))
     ]
+    
+//    init(settings: Settings = Settings(), selectedTime: Int, times: [Settings.Time]) {
+//        self.selectedTime = 0
+//        self.settings = settings
+//        self.selectedTime = selectedTime
+//        self.times = times
+//    }
     
     //устанавливаем настройки (для экрана Settings)
     mutating func setSettings(durationGame: Int, backgroundMusic: String, soundTickingMusic: String, soundBompBoom: String, vibration: Bool, tasks: Bool) {
@@ -31,7 +38,7 @@ struct SettingsBrain {
     
     //получить длительность игры
     func getDurationGame() -> Int {
-        return times[0].countSeconds
+        return times[selectedTime].countSeconds
     }
 
     //получить имя файла фоновой музыки
@@ -55,7 +62,7 @@ struct SettingsBrain {
     }
     
     //получить задания
-    func getTaksk() -> Bool {
+    func getTasks() -> Bool {
         return settings.tasks
     }
 
