@@ -28,9 +28,3 @@ struct ToggleSettingsViewModel {
     let isOn: Bool
     let onToggle: () -> Void
 }
-
-//public struct CurrentSettings {
-//    public static var gameTime: GameTime {
-//        SettingsValues.gameTime
-//    }
-//}

@@ -6,6 +6,8 @@ public final class SettingsAssembly {
         let tableManager = SettingsTableManager()
         let presenter = SettingsPresenter(settingsService: settingsService)
         let view = SettingsViewController(presenter: presenter, tableManager: tableManager)
+        
+        presenter.view = view
         return view
     }
 }

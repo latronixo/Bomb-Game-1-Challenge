@@ -1,6 +1,6 @@
 import UIKit
 
-final class DisclosureSettingsTableViewCell: UITableViewCell {
+final class DisclosureSettingsTableViewCell: BaseSettingsTableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
@@ -13,7 +13,7 @@ final class DisclosureSettingsTableViewCell: UITableViewCell {
         super.prepareForReuse()
     }
     
-    func fill(_ viewModel: DisclosureSettingsViewModel) {
+    func fill(_ viewModel: [DisclosureSettingsViewModel]) {
         
     }
 }

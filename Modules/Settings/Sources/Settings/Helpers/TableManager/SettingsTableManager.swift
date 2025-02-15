@@ -39,7 +39,25 @@ extension SettingsTableManager: @preconcurrency ISettingsTableManager {
 }
 
 extension SettingsTableManager: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let section = sections[safe: indexPath.section] else { return .zero }
+        switch section {
+        case .titleSelection:
+            return 183
+        case .disclosureSection:
+            return 235
+        case .toggleSection:
+            return 151
+        }
+    }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 16.0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return .init()
+    }
 }
 
 extension SettingsTableManager: UITableViewDataSource {
@@ -47,15 +65,7 @@ extension SettingsTableManager: UITableViewDataSource {
         sections.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let section = sections[safe: section] else { return .zero }
-        switch section {
-        case .titleSelection(_, let viewModels):
-            return viewModels.isEmpty ? .zero : 1
-        case .disclosureSection(let viewModels):
-            return viewModels.count
-        case .toggleSection(let viewModels):
-            return viewModels.count
-        }
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,18 +78,16 @@ extension SettingsTableManager: UITableViewDataSource {
             cell.fill(viewModels)
             return cell
         case .disclosureSection(let viewModels):
-            guard let viewModel = viewModels[safe: indexPath.row],
-                  let cell = tableView.dequeueReusableCell(
+            guard let cell = tableView.dequeueReusableCell(
                     withIdentifier: DisclosureSettingsTableViewCell.reuseIdentifier
                   ) as? DisclosureSettingsTableViewCell else { return .init() }
-            cell.fill(viewModel)
+            cell.fill(viewModels)
             return cell
         case .toggleSection(let viewModels):
-            guard let viewModel = viewModels[safe: indexPath.row],
-                  let cell = tableView.dequeueReusableCell(
+            guard let cell = tableView.dequeueReusableCell(
                     withIdentifier: ToggleSettingsTableViewCell.reuseIdentifier
                   ) as? ToggleSettingsTableViewCell else { return .init() }
-            cell.fill(viewModel)
+            cell.fill(viewModels)
             return cell
         }
     }
