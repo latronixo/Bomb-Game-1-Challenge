@@ -132,8 +132,8 @@ class MainViewController: BaseViewController {
     // MARK: - Actions
     
     @objc func settingsScreen() {
-//        let settingsVC = SettingsView()
-//        navigationController?.pushViewController(settingsVC, animated: true)
+        let settingsVC = SettingViewController()
+        navigationController?.pushViewController(settingsVC, animated: true)
     }
 
     @objc func goRules() {
