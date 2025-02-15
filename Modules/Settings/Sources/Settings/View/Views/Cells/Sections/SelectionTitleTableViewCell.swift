@@ -1,6 +1,6 @@
 import UIKit
 
-final class ToggleSettingsTableViewCell: UITableViewCell {
+final class SelectionTitleTableViewCell: BaseSettingsTableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
@@ -13,7 +13,7 @@ final class ToggleSettingsTableViewCell: UITableViewCell {
         super.prepareForReuse()
     }
     
-    func fill(_ viewModel: ToggleSettingsViewModel) {
-        
+    func fill(_ viewModel: [TitleSettingsViewModel]) {
+        debugPrint(viewModel)
     }
 }
