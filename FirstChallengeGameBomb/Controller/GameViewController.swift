@@ -11,9 +11,11 @@ import AVFoundation
 
 class GameViewController: UIViewController {
 
+    private var settings = SettingsBrain()
+    
     private var gameBrain = GameBrain()
     private var timer: Timer?
-    private var runCountTimer = 30
+    private var runCountTimer = 3
     private var playerSound: AVAudioPlayer?
     private var playerMusic: AVAudioPlayer?
 
@@ -84,6 +86,9 @@ class GameViewController: UIViewController {
         backButton.target = self
         pauseButton.target = self
         configureUI()
+        
+        //инициализация настроек
+        runCountTimer = settings.getDurationGame()
     }
     
 
@@ -197,7 +202,7 @@ class GameViewController: UIViewController {
     // MARK: - Работа со звуком бомбы
     
     func playBombSound() {
-        let url = Bundle.main.url(forResource: "tikane-taymera-bombyi", withExtension: "mp3")
+        let url = Bundle.main.url(forResource: settings.getSoundTickingBomb(), withExtension: "mp3")
         playerSound = try! AVAudioPlayer(contentsOf: url!)
         playerSound?.numberOfLoops =  -1
         playerSound?.play()
@@ -211,7 +216,7 @@ class GameViewController: UIViewController {
     // MARK: - Работа с фоновой музыкой
     
     func playMusic() {
-        let url = Bundle.main.url(forResource: "muzyika-dlya-sna-relaks", withExtension: "mp3")
+        let url = Bundle.main.url(forResource: settings.getBackgroundMusic(), withExtension: "mp3")
         playerMusic = try! AVAudioPlayer(contentsOf: url!)
         playerMusic?.numberOfLoops =  -1
         playerMusic?.play()
