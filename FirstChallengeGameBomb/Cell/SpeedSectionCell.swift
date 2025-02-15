@@ -9,6 +9,7 @@ import UIKit
 
 final class SpeedSectionCell: UICollectionViewCell {
     static let reuseIdentifier = "RulesSectionCell"
+    var onTimeSelected: ((Int) -> Void)?
     
     // MARK: - UI Elements
     private let titleLabel: UILabel = {
@@ -26,6 +27,8 @@ final class SpeedSectionCell: UICollectionViewCell {
         stack.distribution = .fillEqually
         return stack
     }()
+    
+    private var buttons: [UIButton] = []
     
     // MARK: - Init
     override init(frame: CGRect) {
@@ -86,12 +89,25 @@ final class SpeedSectionCell: UICollectionViewCell {
             button.setTitleColor(.white, for: .normal)
             button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             stack.addArrangedSubview(button)
+            buttons.append(button)
         }
         
         return stack
     }
     
     @objc private func buttonTapped(_ sender: UIButton) {
-        print("Нажата кнопка: \(sender.currentTitle ?? "")")
+        for button in buttons {
+                    button.backgroundColor = .settingsBlack
+                }
+        sender.backgroundColor = .appYellow
+                
+                if let index = buttons.firstIndex(of: sender) {
+                    onTimeSelected?(index)
+                }
+    }
+    func updateSelectedButton(index: Int) {
+        for (i, button) in buttons.enumerated() {
+            button.backgroundColor = (i == index) ? .appYellow : .settingsBlack
+        }
     }
 }

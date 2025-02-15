@@ -5,6 +5,8 @@ class SettingViewController: UIViewController {
     
     private var collectionView: UICollectionView!
     private let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+    
+    private var settingsBrain = SettingsBrain()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -113,6 +115,14 @@ extension SettingViewController: UICollectionViewDataSource {
                 withReuseIdentifier: SpeedSectionCell.reuseIdentifier,
                 for: indexPath
             ) as! SpeedSectionCell
+            
+            // Обновляем состояние кнопок при загрузке
+            cell.updateSelectedButton(index: settingsBrain.selectedTime)
+            
+            // Передаем выбранное время в SettingsBrain
+            cell.onTimeSelected = { [weak self] index in
+                self?.settingsBrain.selectedTime = index
+            }
             return cell
             
         case 1:
