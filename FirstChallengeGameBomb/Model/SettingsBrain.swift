@@ -6,11 +6,18 @@
 //
 
 import UIKit
+import Settings
 
 struct SettingsBrain {
     
+    @UserDefault(key: "selectedTimeKey", defaultValue: 0)
+     var selectedTime: Int {
+        didSet {
+            print("Выбранное время обновлено: \(selectedTime)")
+        }
+    }
+    
     var settings = Settings()
-    var selectedTime: Int = 0
     
     var times = [
         Settings.Time(text: "Короткое", countSeconds: 10),
@@ -19,12 +26,12 @@ struct SettingsBrain {
         Settings.Time(text: "Случайное", countSeconds: Int.random(in: 10...45))
     ]
     
-//    init(settings: Settings = Settings(), selectedTime: Int, times: [Settings.Time]) {
-//        self.selectedTime = 0
-//        self.settings = settings
-//        self.selectedTime = selectedTime
-//        self.times = times
-//    }
+    init() {
+        if UserDefaults.standard.object(forKey: "selectedTimeKey") == nil {
+            selectedTime = 0
+            print("Установлено значение по умолчанию: Короткое время")
+        }
+    }
     
     //устанавливаем настройки (для экрана Settings)
     mutating func setSettings(durationGame: Int, backgroundMusic: String, soundTickingMusic: String, soundBompBoom: String, vibration: Bool, tasks: Bool) {
