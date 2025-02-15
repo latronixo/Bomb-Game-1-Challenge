@@ -96,7 +96,8 @@ class GameViewController: UIViewController {
         title = "Игра"
         
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.setFont(.sfProRoundedBlack, size: 28)
+            .font: UIFont.setFont(.sfProRoundedBlack, size: 28),
+            .foregroundColor: UIColor.PrimaryText
         ]
             
         navigationController?.navigationBar.titleTextAttributes = attributes

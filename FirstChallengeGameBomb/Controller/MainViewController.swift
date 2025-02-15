@@ -11,6 +11,7 @@ import Settings
 class MainViewController: BaseViewController {
 
     private let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+    private var settings = SettingsBrain()
     
     private lazy var firstTitleLabel: UILabel = {
         let element = UILabel()
@@ -132,6 +133,7 @@ class MainViewController: BaseViewController {
     // MARK: - Actions
     
     @objc func settingsScreen() {
+        if settings.onVibration { UIImpactFeedbackGenerator(style: .light).impactOccurred() }
         let settingsVC = SettingViewController()
         navigationController?.pushViewController(settingsVC, animated: true)
     }

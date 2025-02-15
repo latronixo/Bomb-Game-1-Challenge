@@ -1,5 +1,8 @@
 import UIKit
 
+protocol SettingsViewControllerDelegate: AnyObject {
+    func reloadSettings()
+}
 
 class SettingViewController: UIViewController {
     
@@ -76,7 +79,8 @@ class SettingViewController: UIViewController {
         title = "Настройки"
         
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.setFont(.sfProRoundedBlack, size: 28)
+            .font: UIFont.setFont(.sfProRoundedBlack, size: 28),
+            .foregroundColor: UIColor.PrimaryText
         ]
             
         navigationController?.navigationBar.titleTextAttributes = attributes
@@ -97,6 +101,28 @@ class SettingViewController: UIViewController {
     @objc func backToMainScreen() {
         navigationController?.popViewController(animated: true)
     }
+    
+    @objc func goSelectSound(_ sender: UIButton) {        
+        let musicSelectionVC = MusicSelectionViewController()
+        musicSelectionVC.delegate = self
+        
+        switch sender.titleLabel?.text {
+        case "Фоновая музыка":
+            musicSelectionVC.musics = settingsBrain.backgroundMusic
+            musicSelectionVC.musicType = .backgroundMusic
+        case "Тиканье бомбы":
+            musicSelectionVC.musics = settingsBrain.tickingBombMusic
+            musicSelectionVC.musicType = .soundTickingBomb
+        case "Взрыв бомбы":
+            musicSelectionVC.musics = settingsBrain.bombBoomMusic
+            musicSelectionVC.musicType = .soundBombBoom
+        default:
+            break
+        }
+        
+        navigationController?.pushViewController(musicSelectionVC, animated: true)
+    }
+    
 }
 // MARK: - UICollectionViewDataSource
 extension SettingViewController: UICollectionViewDataSource {
@@ -130,6 +156,7 @@ extension SettingViewController: UICollectionViewDataSource {
                 withReuseIdentifier: OptionsSectionCell.reuseIdentifier,
                 for: indexPath
             ) as! OptionsSectionCell
+            cell.setupUI(selector: #selector(goSelectSound))
             return cell
             
         case 2:
@@ -142,5 +169,12 @@ extension SettingViewController: UICollectionViewDataSource {
         default:
             fatalError("Неизвестная секция")
         }
+    }
+}
+
+extension SettingViewController: SettingsViewControllerDelegate {
+    func reloadSettings() {
+        print("test reloadSettings")
+        collectionView.reloadData()
     }
 }

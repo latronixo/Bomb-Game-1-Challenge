@@ -8,6 +8,7 @@ import UIKit
 
 final class SwitchesSectionCell: UICollectionViewCell {
     static let reuseIdentifier = "SwitchesSectionCell"
+    private var settings = SettingsBrain()
     
     // MARK: - UI Elements
     private let stackView: UIStackView = {
@@ -70,7 +71,6 @@ final class SwitchesSectionCell: UICollectionViewCell {
         
         // Добавляем переключатель
         let switchControl = UISwitch()
-        switchControl.isOn = true
         switchControl.onTintColor = .appYellow
         switchControl.addTarget(self, action: #selector(switchValueChanged(_:)), for: .valueChanged)
         button.addSubview(switchControl)
@@ -81,10 +81,23 @@ final class SwitchesSectionCell: UICollectionViewCell {
             switchControl.centerYAnchor.constraint(equalTo: button.centerYAnchor)
         ])
         
+        if title == "Вибрация" {
+            switchControl.isOn = settings.onVibration
+        } else {
+            switchControl.isOn = settings.onTasks
+        }
+        
         return button
     }
     
     @objc private func switchValueChanged(_ sender: UISwitch) {
-        print("Переключатель \(sender.isOn ? "включен" : "выключен")")
+        if let button = sender.superview as? UIButton {
+            let title = button.titleLabel?.text ?? ""
+            if title == "Вибрация" {
+                settings.onVibration = sender.isOn
+            } else {
+                settings.onTasks = sender.isOn
+            }
+        }
     }
 }
