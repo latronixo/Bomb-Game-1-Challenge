@@ -8,6 +8,7 @@
 import UIKit
 import Settings
 import AVFoundation
+import AudioToolbox
 
 final class FinalGameViewController: BaseViewController {
     
@@ -79,6 +80,9 @@ final class FinalGameViewController: BaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if settings.getVibration() {
+            AudioServicesPlayAlertSoundWithCompletion(SystemSoundID (kSystemSoundID_Vibrate)) {}
+        }
         playMusic()
     }
     
