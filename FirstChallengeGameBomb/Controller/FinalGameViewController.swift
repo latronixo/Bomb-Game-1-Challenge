@@ -156,7 +156,7 @@ final class FinalGameViewController: BaseViewController {
     }
     
     private func playMusic() {
-        guard let url = Bundle.main.url(forResource: settings.getSoundBoobBoom(), withExtension: "mp3") else { return }
+        guard let url = Bundle.main.url(forResource: settings.getSoundBombBoom(), withExtension: "mp3") else { return }
         do {
             playerMusic = try AVAudioPlayer(contentsOf: url)
             playerMusic?.play()

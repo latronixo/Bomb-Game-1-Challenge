@@ -52,7 +52,7 @@ struct SettingsBrain {
     }
 
     //получить имя файла взрыва бомбы
-    func getSoundBoobBoom() -> String {
+    func getSoundBombBoom() -> String {
         return settings.soundBombBoom
     }
 
