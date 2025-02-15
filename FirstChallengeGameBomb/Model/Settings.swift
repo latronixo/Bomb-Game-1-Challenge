@@ -7,10 +7,21 @@
 
 import UIKit
 
+enum MusicType {
+    case backgroundMusic
+    case soundTickingBomb
+    case soundBombBoom
+}
+
 struct Settings {
     struct Time {
         let text: String
         let countSeconds: Int
+    }
+    
+    struct Music {
+        let title: String
+        let fileName: String
     }
     
     var backgroundMusic: String = "muzyika-dlya-sna-relaks"

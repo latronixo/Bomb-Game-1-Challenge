@@ -17,6 +17,21 @@ struct SettingsBrain {
         }
     }
     
+    @UserDefault(key: "backgroundMusic", defaultValue: "Melody1")
+    var backgroundMusicValue: String
+    
+    @UserDefault(key: "tickingBombMusic", defaultValue: "Ticking2")
+    var tickingBombMusicValue: String
+    
+    @UserDefault(key: "bombBoomMusic", defaultValue: "Boom")
+    var bombBoomMusicValue: String
+    
+    @UserDefault(key: "onVibration", defaultValue: true)
+    var onVibration: Bool
+    
+    @UserDefault(key: "onTasks", defaultValue: true)
+    var onTasks: Bool
+    
     var settings = Settings()
     
     var times = [
@@ -26,10 +41,52 @@ struct SettingsBrain {
         Settings.Time(text: "Случайное", countSeconds: Int.random(in: 10...45))
     ]
     
+    var backgroundMusic = [
+        Settings.Music(title: "Мелодия 1", fileName: "Melody1"),
+        Settings.Music(title: "Мелодия 2", fileName: "Melody2"),
+        Settings.Music(title: "Мелодия 3", fileName: "Melody3"),
+        Settings.Music(title: "Мелодия 4", fileName: "Melody4"),
+        Settings.Music(title: "Мелодия 5", fileName: "Melody5"),
+        Settings.Music(title: "Мелодия 6", fileName: "Melody6"),
+        Settings.Music(title: "Мелодия 7", fileName: "muzyika-dlya-sna-relaks")
+    ]
+    
+    var tickingBombMusic = [
+        Settings.Music(title: "Часы 1", fileName: "Ticking2"),
+        Settings.Music(title: "Часы 2", fileName: "Ticking3"),
+        Settings.Music(title: "Часы 3", fileName: "tikane-taymera-bombyi"),
+    ]
+    
+    var bombBoomMusic = [
+        Settings.Music(title: "Взрыв 1", fileName: "Boom"),
+        Settings.Music(title: "Взрыв 2", fileName: "Boom2"),
+        Settings.Music(title: "Взрыв 3", fileName: "Boom3")
+    ]
+    
     init() {
         if UserDefaults.standard.object(forKey: "selectedTimeKey") == nil {
             selectedTime = 0
             print("Установлено значение по умолчанию: Короткое время")
+        }
+        
+        if UserDefaults.standard.object(forKey: "backgroundMusic") == nil {
+            backgroundMusicValue = "Melody1"
+        }
+        
+        if UserDefaults.standard.object(forKey: "tickingBombMusic") == nil {
+            tickingBombMusicValue = "Ticking2"
+        }
+        
+        if UserDefaults.standard.object(forKey: "bombBoomMusic") == nil {
+            bombBoomMusicValue = "Boom"
+        }
+        
+        if UserDefaults.standard.object(forKey: "onVibration") == nil {
+            onVibration = true
+        }
+        
+        if UserDefaults.standard.object(forKey: "onTasks") == nil {
+            onTasks = true
         }
     }
     
@@ -50,27 +107,27 @@ struct SettingsBrain {
 
     //получить имя файла фоновой музыки
     func getBackgroundMusic() -> String {
-        return settings.backgroundMusic
+        return backgroundMusicValue
     }
     
     //получить имя файла тиканья бомбы
     func getSoundTickingBomb() -> String {
-        return settings.soundTickingBomb
+        return tickingBombMusicValue
     }
 
     //получить имя файла взрыва бомбы
     func getSoundBombBoom() -> String {
-        return settings.soundBombBoom
+        return bombBoomMusicValue
     }
 
     //получить вибрацию
     func getVibration() -> Bool {
-        return settings.vibration
+        return onVibration
     }
     
     //получить задания
     func getTasks() -> Bool {
-        return settings.tasks
+        return onTasks
     }
 
 }
