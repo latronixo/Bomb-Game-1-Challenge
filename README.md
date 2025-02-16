@@ -1,3 +1,7 @@
+![image](https://github.com/ElShtolts13/Bomb-Game-1-Challenge/blob/main/mainImage.jpg)
+
+
+
 # Бомба 💣 — Игра для компании (Swift, UIKit)
 
 ![iOS Version](https://img.shields.io/badge/iOS-15.0+-blue?style=flat&logo=apple)
