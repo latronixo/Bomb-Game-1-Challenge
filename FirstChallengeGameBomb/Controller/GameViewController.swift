@@ -15,7 +15,7 @@ class GameViewController: UIViewController {
     
     private var gameBrain = GameBrain()
     private var timer: Timer?
-    private var runCountTimer = 3
+    private var runCountTimer = 30
     private var playerSound: AVAudioPlayer?
     private var playerMusic: AVAudioPlayer?
 
