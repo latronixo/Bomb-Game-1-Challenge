@@ -10,8 +10,18 @@ import Settings
 
 class MainViewController: BaseViewController {
 
-    private let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
     private var settings = SettingsBrain()
+    
+    private let gameBackgroundView: UIImageView = {
+        let view = UIImageView()
+        view.isUserInteractionEnabled = true
+        view.backgroundColor = .MainBackground
+        view.image = .topographic3
+        view.tintColor = UIColor(red: 0.89, green: 0.72, blue: 0.29, alpha: 1)
+        view.image = view.image?.withRenderingMode(.alwaysTemplate)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     private lazy var firstTitleLabel: UILabel = {
         let element = UILabel()
@@ -60,25 +70,18 @@ class MainViewController: BaseViewController {
     }
 
     private func setupUI () {
-        [backgroundImage, firstTitleLabel, secondTitleLabel, bombMainImage, startGameButton, categoriesButton]
+        [gameBackgroundView, firstTitleLabel, secondTitleLabel, bombMainImage, startGameButton, categoriesButton]
             .forEach({ view.addSubview($0) })
-
-        backgroundImage.image = UIImage(named: "backgroundMainScreen")
-        backgroundImage.contentMode = .scaleAspectFill
-        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
-
-        view.backgroundColor = .appYellowMainView
-        
     }
     
     //MARK: - Contstraints
     
     private func setupConstraints () {
         NSLayoutConstraint.activate([
-            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            gameBackgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            gameBackgroundView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
+            gameBackgroundView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
+            gameBackgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
  
             firstTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
             firstTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),

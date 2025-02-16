@@ -76,6 +76,8 @@ final class FinalGameViewController: BaseViewController {
         if settings.getTasks() {
             otherTaskButton.addTarget(self, action: #selector(otherTaskButtonTapped), for: .touchUpInside)
         }
+        
+        descriptionLabel.text = tasks[Int.random(in: 0..<tasks.count)]
     }
 
     override func viewDidAppear(_ animated: Bool) {
